@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1.1">
+
+    <test.ibaokang.com.test.view.Title
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:title_img="@drawable/back"
+        app:title_name="@string/login" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/login_margin"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                style="@style/Login_style"
+                android:maxLength="11"
+                android:digits="1234567890"
+                android:hint="@string/tel" />
+
+            <EditText
+                style="@style/Login_style"
+                android:password="true"
+                android:hint="@string/pwd" />
+
+            <Button
+                android:id="@+id/login_but"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/login_marginTop"
+                android:padding="@dimen/login_edit_padding"
+                android:text="@string/login_but"
+                android:background="@color/green"/>
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="button" />
+            </LinearLayout>-->
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/login_margin"
+            android:padding="@dimen/login_edit_padding"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/register"
+                style="@style/Login_style_m"
+                android:text="@string/register" />
+
+            <TextView
+                android:id="@+id/forget_pwd"
+                style="@style/Login_style_m"
+                android:layout_toRightOf="@id/register"
+                android:text="@string/forget_pwd" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/third" />
+
+        <ImageView
+            android:id="@+id/third_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/login_marginTop"
+            android:src="@mipmap/third_qq"/>
+
+        <ImageView
+            android:id="@+id/third_wb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/login_marginTop"
+            android:src="@mipmap/third_wb"/>
+
+        <ImageView
+            android:id="@+id/third_wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/login_marginTop"
+            android:src="@mipmap/third_wechat_"/>
+    </LinearLayout>
+
+</LinearLayout>

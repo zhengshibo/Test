@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="tab_text_normal">#212121</color>
+    <color name="red">#ff0000</color>
+
+    <color name="comui_tab_text_color">#ff333333</color>
+    <color name="viewBackground">#ffffff</color>
+
+    <color name="black">#000</color>
+    <color name="grep_e1e">#e1e1e1</color>
+    <color name="black_333">#333333</color>
+    <color name="white">#fff</color>
+    <color name="green">#14e715</color>
+
+    <color name="gray">#888888</color>
+    <color name="text_title_color">#FFF</color>
+    <color name="actionbar_color">#303537</color>
+    <color name="grep_eee">#eee</color>
+</resources>

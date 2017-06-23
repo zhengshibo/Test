@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Test</string>
+
+    <string name="login">登录</string>
+    <string name="city">城市</string>
+
+    <string name="select_img">选择图片</string>
+    <string name="take_photo">拍照</string>
+    <string name="gallery">图库</string>
+
+    <string name="tel">输入手机号</string>
+    <string name="pwd">输入密码</string>
+    <string name="login_but">登录</string>
+    <string name="forget_pwd">忘记密码</string>
+    <string name="register">注册</string>
+    <string name="third">使用社交帐号：</string>
+    <string name="more">更多</string>
+    <string name="todaytop">今日排行</string>
+    <string name="classtype">分类</string>
+    <string name="recommend">推荐</string>
+    <string name="news">新闻</string>
+    <string name="discount">折扣</string>
+
+    <string-array name="check_photo">
+        <item>@string/take_photo</item>
+        <item>@string/gallery</item>
+    </string-array>
+</resources>

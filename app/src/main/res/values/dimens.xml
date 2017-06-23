@@ -1,0 +1,29 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="dot_width">15dp</dimen>
+    <dimen name="dot_heigh">15dp</dimen>
+    <dimen name="dot_marginleft">5dp</dimen>
+    <dimen name="dot_marginright">5dp</dimen>
+
+    <dimen name="dots_margintop">60dp</dimen>
+    <dimen name="choose_img_item_min_height">80dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
+    <dimen name="choose_img_padding">30dp</dimen>
+
+    <dimen name="login_margin">20dp</dimen>
+    <dimen name="login_marginTop">20dp</dimen>
+    <dimen name="login_edit_padding">10dp</dimen>
+    <dimen name="login_m_margin">10dp</dimen>
+    <dimen name="setting_model_item_height">56dp</dimen>
+    <dimen name="parent_item_model_margin">10dp</dimen>
+
+    <dimen name="txt_size_24">21sp</dimen>
+    <dimen name="txt_size_28">24sp</dimen>
+    <dimen name="model_person_text_size">14sp</dimen>
+</resources>

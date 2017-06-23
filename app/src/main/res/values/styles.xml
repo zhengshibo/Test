@@ -1,0 +1,52 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/actionbar_color</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@color/actionbar_color</item>
+        <!--<item name="android:statusBarColor">@android:color/holo_blue_bright</item>-->
+    </style>
+    <!--<item name="android:statusBarColor">@color/actionbar_color</item>-->
+
+    <style name="dot">
+        <item name="android:layout_width">@dimen/dot_width</item>
+        <item name="android:layout_height">@dimen/dot_heigh</item>
+        <item name="android:background">@drawable/main_point_black</item>
+        <item name="android:layout_marginLeft">@dimen/dot_marginleft</item>
+        <item name="android:layout_marginRight">@dimen/dot_marginright</item>
+    </style>
+
+    <style name="dots">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_margin">@dimen/dots_margintop</item>
+    </style>
+
+    <style name="ActivityTransparent" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="Login_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/login_marginTop</item>
+        <item name="android:padding">@dimen/login_edit_padding</item>
+        <item name="android:background">@drawable/shape_login</item>
+    </style>
+
+    <style name="Login_style_m">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/login_m_margin</item>
+    </style>
+
+</resources>
