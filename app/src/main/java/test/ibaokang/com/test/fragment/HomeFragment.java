@@ -95,7 +95,7 @@ public class HomeFragment extends BaseFragment {
         mGridView.setAdapter(classAdapter);
         mTodayTop.setAdapter(topAdapter);
 //        mRecommend.setAdapter(recommendAdapter);
-        mRecyclerView.setAdapter();
+
         mGridView.setOnItemClickListener(new ItemClickListener());
         mTodayTop.setOnItemClickListener(new ItemClickListener());
     }

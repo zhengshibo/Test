@@ -10,6 +10,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+
 import android.os.Handler;
 import android.os.Looper;
 
@@ -35,8 +36,7 @@ public class OkHttpUtils {
     private Gson mGson = new Gson();
     private Handler mDelivery;
 
-    private OkHttpUtils()
-    {
+    private OkHttpUtils() {
         mOkHttpClient = new OkHttpClient();
         //cookie enabled
         mOkHttpClient.setCookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ORIGINAL_SERVER));
@@ -44,14 +44,10 @@ public class OkHttpUtils {
         mGson = new Gson();
     }
 
-    public static OkHttpUtils getInstance()
-    {
-        if (mInstance == null)
-        {
-            synchronized (OkHttpUtils.class)
-            {
-                if (mInstance == null)
-                {
+    public static OkHttpUtils getInstance() {
+        if (mInstance == null) {
+            synchronized (OkHttpUtils.class) {
+                if (mInstance == null) {
                     mInstance = new OkHttpUtils();
                 }
             }
@@ -59,18 +55,15 @@ public class OkHttpUtils {
         return mInstance;
     }
 
-    public static Response getAsyn(String url) throws IOException
-    {
+    public static Response getAsyn(String url) throws IOException {
         return getInstance()._getAsyn(url);
     }
 
-    public static void postAsyn(String url, ResultCallback callback, File file, String fileKey) throws IOException
-    {
+    public static void postAsyn(String url, ResultCallback callback, File file, String fileKey) throws IOException {
         getInstance()._postAsyn(url, callback, file, fileKey);
     }
 
-    public static String postAsString(String url, Param... params) throws IOException
-    {
+    public static String postAsString(String url, Param... params) throws IOException {
         return getInstance()._postAsString(url, params);
     }
 
@@ -81,8 +74,7 @@ public class OkHttpUtils {
      * @param params post的参数
      * @return
      */
-    private Response _post(String url, Param... params) throws IOException
-    {
+    private Response _post(String url, Param... params) throws IOException {
         Request request = buildPostRequest(url, params);
         Response response = mOkHttpClient.newCall(request).execute();
         return response;
@@ -95,8 +87,7 @@ public class OkHttpUtils {
      * @param params post的参数
      * @return 字符串
      */
-    private String _postAsString(String url, Param... params) throws IOException
-    {
+    private String _postAsString(String url, Param... params) throws IOException {
         Response response = _post(url, params);
         return response.body().string();
     }
@@ -107,8 +98,7 @@ public class OkHttpUtils {
      * @param url
      * @return Response
      */
-    private Response _getAsyn(String url) throws IOException
-    {
+    private Response _getAsyn(String url) throws IOException {
         final Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -117,30 +107,25 @@ public class OkHttpUtils {
         return execute;
     }
 
-    private void _postAsyn(String url, ResultCallback callback, File file, String fileKey) throws IOException
-    {
+    private void _postAsyn(String url, ResultCallback callback, File file, String fileKey) throws IOException {
         Request request = buildMultipartFormRequest(url, new File[]{file}, new String[]{fileKey}, null);
         deliveryResult(callback, request);
     }
 
     private Request buildMultipartFormRequest(String url, File[] files,
-                                              String[] fileKeys, Param[] params)
-    {
+                                              String[] fileKeys, Param[] params) {
         params = validateParam(params);
 
         MultipartBuilder builder = new MultipartBuilder()
                 .type(MultipartBuilder.FORM);
 
-        for (Param param : params)
-        {
+        for (Param param : params) {
             builder.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + param.key + "\""),
                     RequestBody.create(null, param.value));
         }
-        if (files != null)
-        {
+        if (files != null) {
             RequestBody fileBody = null;
-            for (int i = 0; i < files.length; i++)
-            {
+            for (int i = 0; i < files.length; i++) {
                 File file = files[i];
                 String fileName = file.getName();
                 fileBody = RequestBody.create(MediaType.parse(guessMimeType(fileName)), file);
@@ -158,45 +143,35 @@ public class OkHttpUtils {
                 .build();
     }
 
-    private String guessMimeType(String path)
-    {
+    private String guessMimeType(String path) {
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
         String contentTypeFor = fileNameMap.getContentTypeFor(path);
-        if (contentTypeFor == null)
-        {
+        if (contentTypeFor == null) {
             contentTypeFor = "application/octet-stream";
         }
         return contentTypeFor;
     }
 
-    private void deliveryResult(final ResultCallback callback, Request request)
-    {
-        mOkHttpClient.newCall(request).enqueue(new Callback()
-        {
+    private void deliveryResult(final ResultCallback callback, Request request) {
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(final Request request, final IOException e)
-            {
+            public void onFailure(final Request request, final IOException e) {
                 sendFailedStringCallback(request, e, callback);
             }
 
             @Override
-            public void onResponse(final Response response)
-            {
-                try
-                {
+            public void onResponse(final Response response) {
+                try {
                     final String string = response.body().string();
-                    if (callback.mType == String.class)
-                    {
+                    if (callback.mType == String.class) {
                         sendSuccessResultCallback(string, callback);
-                    } else
-                    {
+                    } else {
                         Object o = mGson.fromJson(string, callback.mType);
                         sendSuccessResultCallback(o, callback);
                     }
 
 
-                } catch (IOException e)
-                {
+                } catch (IOException e) {
                     sendFailedStringCallback(response.request(), e, callback);
                 } catch (com.google.gson.JsonParseException e)//Json解析的错误
                 {
@@ -207,43 +182,33 @@ public class OkHttpUtils {
         });
     }
 
-    private void sendFailedStringCallback(final Request request, final Exception e, final ResultCallback callback)
-    {
-        mDelivery.post(new Runnable()
-        {
+    private void sendFailedStringCallback(final Request request, final Exception e, final ResultCallback callback) {
+        mDelivery.post(new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 if (callback != null)
                     callback.onError(request, e);
             }
         });
     }
 
-    private void sendSuccessResultCallback(final Object object, final ResultCallback callback)
-    {
-        mDelivery.post(new Runnable()
-        {
+    private void sendSuccessResultCallback(final Object object, final ResultCallback callback) {
+        mDelivery.post(new Runnable() {
             @Override
-            public void run()
-            {
-                if (callback != null)
-                {
+            public void run() {
+                if (callback != null) {
                     callback.onResponse(object);
                 }
             }
         });
     }
 
-    private Request buildPostRequest(String url, Param[] params)
-    {
-        if (params == null)
-        {
+    private Request buildPostRequest(String url, Param[] params) {
+        if (params == null) {
             params = new Param[0];
         }
         FormEncodingBuilder builder = new FormEncodingBuilder();
-        for (Param param : params)
-        {
+        for (Param param : params) {
             builder.add(param.key, param.value);
         }
         RequestBody requestBody = builder.build();
@@ -253,20 +218,16 @@ public class OkHttpUtils {
                 .build();
     }
 
-    public static abstract class ResultCallback<T>
-    {
+    public static abstract class ResultCallback<T> {
         Type mType;
 
-        public ResultCallback()
-        {
+        public ResultCallback() {
             mType = getSuperclassTypeParameter(getClass());
         }
 
-        static Type getSuperclassTypeParameter(Class<?> subclass)
-        {
+        static Type getSuperclassTypeParameter(Class<?> subclass) {
             Type superclass = subclass.getGenericSuperclass();
-            if (superclass instanceof Class)
-            {
+            if (superclass instanceof Class) {
                 throw new RuntimeException("Missing type parameter.");
             }
             ParameterizedType parameterized = (ParameterizedType) superclass;
@@ -278,14 +239,11 @@ public class OkHttpUtils {
         public abstract void onResponse(T response);
     }
 
-    public static class Param
-    {
-        public Param()
-        {
+    public static class Param {
+        public Param() {
         }
 
-        public Param(String key, String value)
-        {
+        public Param(String key, String value) {
             this.key = key;
             this.value = value;
         }
@@ -294,8 +252,7 @@ public class OkHttpUtils {
         String value;
     }
 
-    private Param[] validateParam(Param[] params)
-    {
+    private Param[] validateParam(Param[] params) {
         if (params == null)
             return new Param[0];
         else return params;
